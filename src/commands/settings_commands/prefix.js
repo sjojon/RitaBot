@@ -6,7 +6,7 @@
 const logger = require("../../core/logger");
 const db = require("../../core/db");
 const sendMessage = require("../../core/command.send");
-const message = require("../../message");
+// const message = require("../../message");
 
 // -------------------------------
 // Prefix varible command handler
@@ -145,12 +145,12 @@ module.exports = function run (data)
    {
 
       const cmd = data.config.translateCmdShort;
-      const object_prefix = db.server_obj[data.message.guild.id].db.prefix;
+      const object_prefix = data.cmd.server[0].prefix;
       if (cmd !== object_prefix && object_prefix !== "!tr")
       {
 
          data.color = "info";
-         data.text = `:information_source: Your current prefix is: **\`${db.server_obj[message.guild.id].db.prefix}\`**\n\n`;
+         data.text = `:information_source: Your current prefix is: **\`${data.cmd.server[0].prefix}\`**\n\n`;
 
       }
       else

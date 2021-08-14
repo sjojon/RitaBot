@@ -12,8 +12,8 @@ const Sequelize = require("sequelize");
 const logger = require("./logger");
 const Op = Sequelize.Op;
 let dbNewPrefix = "";
-const server_obj = {};
-exports.server_obj = server_obj;
+// const server_obj = {};
+// exports.server_obj = server_obj;
 
 // ----------------------
 // Database Auth Process
@@ -283,6 +283,8 @@ exports.initializeDatabase = async function initializeDatabase (client)
          });
 
       }
+
+      /*
       // console.log("DEBUG: Stage Init/create tables - Pre servers FindAll");
       const serversFindAll = await Servers.findAll({logging: false});
       // {
@@ -316,7 +318,7 @@ exports.initializeDatabase = async function initializeDatabase (client)
          }
          server_obj.size += guild.memberCount;
 
-      }
+      } */
       console.log("----------------------------------------\nDatabase fully initialized.\n----------------------------------------");
       // });
 
@@ -332,6 +334,7 @@ exports.addServer = async function addServer (id, lang)
 {
 
    // console.log("DEBUG: Stage Add Server to Database");
+   /*
    server_obj[id] = {
       "db": {
          "embedstyle": "on",
@@ -342,6 +345,7 @@ exports.addServer = async function addServer (id, lang)
          "prefix": "!tr"
       }
    };
+   */
    await Servers.findAll({logging: false,
       "where": {id}}).then((server) =>
    {
@@ -367,12 +371,14 @@ exports.addServer = async function addServer (id, lang)
 // Add server member count
 // ------------------
 
+/*
 exports.servercount = function servercount (guild)
 {
 
    server_obj.size += guild.memberCount;
 
 };
+*/
 
 // -------------------------------
 // Update Embedded Variable in DB
@@ -382,7 +388,7 @@ exports.updateEmbedVar = function updateEmbedVar (id, embedstyle, _cb)
 {
 
    // console.log("DEBUG: Stage Update Embedded Variable in DB");
-   server_obj[id].db.embedstyle = embedstyle;
+   // server_obj[id].db.embedstyle = embedstyle;
    return Servers.update(
       {embedstyle},
       {"where": {id}}
@@ -403,7 +409,7 @@ exports.updateBot2BotVar = function updateBot2BotVar (id, bot2botstyle, _cb)
 {
 
    // console.log("DEBUG: Stage Update Bot2Bot Variable In DB");
-   server_obj[id].db.bot2botstyle = bot2botstyle;
+   // server_obj[id].db.bot2botstyle = bot2botstyle;
    return Servers.update(
       {bot2botstyle},
       {"where": {id}}
@@ -447,7 +453,7 @@ exports.updatePrefix = function updatePrefix (id, prefix, _cb)
 
    // console.log("DEBUG: Stage Update prefix");
    dbNewPrefix = prefix;
-   server_obj[id].db.prefix = dbNewPrefix;
+   // server_obj[id].db.prefix = dbNewPrefix;
    return Servers.update(
       {prefix},
       {"where": {id}}
@@ -736,6 +742,7 @@ exports.getTasksCount = function getTasksCount (origin, cb)
 // Get Servers Count
 // ------------------
 
+/*
 exports.getServersCount = function getServersCount ()
 {
 
@@ -743,6 +750,7 @@ exports.getServersCount = function getServersCount ()
    return server_obj.length();
 
 };
+*/
 
 // ---------
 // Add Task

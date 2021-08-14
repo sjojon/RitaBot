@@ -46,7 +46,7 @@ module.exports = function run (data)
       const globalStats =
          `**\`\`\`@${data.message.client.user.username} - Global Stats\`\`\`**\n` +
          `:earth_africa:  Default bot language:  **\`${botLang.name} (${botLang.native})\`**\n\n` +
-         `:bar_chart:  Translated **\`${stats[0].totalCount}\`** messages across  **\`${data.message.client.guilds.cache.size}\`**  servers for  **\`${db.server_obj.size}\`**  users\n\n` +
+         `:bar_chart:  Translated **\`${stats[0].totalCount}\`** messages across  **\`${data.message.client.guilds.cache.size}\`**  servers for  **\`${data.message.client.users.cache.size}\`**  users\n\n` +
          `:regional_indicator_v:  Version:  ${version}\n\n` +
          `:repeat:  Automatic translation:  **\`${activeTasks}\`**  channels and **\`${stats[0].activeUserTasks}\`**  users\n`;
 

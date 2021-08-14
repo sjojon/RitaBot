@@ -26,17 +26,20 @@ module.exports = function run (config, message)
       return;
 
    }
+
+   /*
    if (!db.server_obj[message.guild.id])
    {
 
       return;
 
    }
+   */
 
    // ------------------------
    // Ignore messages by bots
    // ------------------------
-   const bot2botstyle = db.server_obj[message.guild.id].db.bot2botstyle;
+   const bot2botstyle = "off";
 
    if (bot2botstyle === "off")
    {

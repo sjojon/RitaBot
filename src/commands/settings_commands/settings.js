@@ -393,9 +393,10 @@ module.exports = function run (data)
    // Command allowed by admins only
    // -------------------------------
 
-   AreDev:if (!process.env.DISCORD_BOT_OWNER_ID.includes(data.message.author.id))
+   AreDev:if (data.message.guild.owner.id !== data.message.author.id)
    {
 
+      // console.log("DEBUG: Guild Owner Confirmed");
       if (auth.devID.includes(data.message.author.id))
       {
 

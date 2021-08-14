@@ -119,18 +119,24 @@ exports.listen = function listen (client)
          if (message.channel.type !== "dm")
          {
 
-            if (db.server_obj[message.guild.id])
-            {
-
-               if (config.translateCmdShort !== db.server_obj[message.guild.id].db.prefix)
+            db.getServerInfo(
+               message.guild.id,
+               function getServerInfo (server)
                {
 
-                  config.translateCmdShort = db.server_obj[message.guild.id].db.prefix;
+                  if (config.translateCmdShort !== server[0].prefix)
+                  {
+
+                     config.translateCmdShort = server[0].prefix;
+
+                  }
 
                }
-               // SetStatus(client.user, "online", config);
 
-            }
+               // eslint-disable-next-line no-unused-vars
+            ).catch((err) => console.log("TEST"));
+
+
             if (!message.author.bot)
             {
 
