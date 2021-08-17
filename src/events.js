@@ -119,24 +119,6 @@ exports.listen = function listen (client)
          if (message.channel.type !== "dm")
          {
 
-            db.getServerInfo(
-               message.guild.id,
-               function getServerInfo (server)
-               {
-
-                  if (config.translateCmdShort !== server[0].prefix)
-                  {
-
-                     config.translateCmdShort = server[0].prefix;
-
-                  }
-
-               }
-
-               // eslint-disable-next-line no-unused-vars
-            ).catch((err) => console.log("TEST"));
-
-
             if (!message.author.bot)
             {
 
