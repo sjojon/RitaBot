@@ -27,14 +27,12 @@ module.exports = function run (config, message)
 
    }
 
-   /*
    if (!db.server_obj[message.guild.id])
    {
 
       return;
 
    }
-   */
 
    // ------------------------
    // Ignore messages by bots
