@@ -220,6 +220,9 @@ exports.initializeDatabase = async function initializeDatabase (client)
    db.sync({logging: false}).then(async () =>
    {
 
+      // eslint-disable-next-line init-declarations
+      let guild;
+
       await Stats.upsert({logging: false,
          "id": "bot"});
       await this.updateColumns();
@@ -238,7 +241,7 @@ exports.initializeDatabase = async function initializeDatabase (client)
       for (i = 0; i < guilds; i += 1)
       {
 
-         const guild = guildsArray[i];
+         guild = guildsArray[i];
          const guildID = guild.id;
          // eslint-disable-next-line no-await-in-loop
          await Stats.upsert({"id": guildID,
@@ -284,7 +287,7 @@ exports.initializeDatabase = async function initializeDatabase (client)
       for (let i = 0; i < guildClient.length; i += 1)
       {
 
-         const guild = guildClient[i];
+         guild = guildClient[i];
          server_obj[guild.id].guild = guild;
          server_obj[guild.id].size = guild.memberCount;
          if (!server_obj.size)
