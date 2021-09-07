@@ -63,7 +63,7 @@ function checkPerms (data, sendBox)
          `:no_entry:  **${data.message.client.user.username}** does not have permission to write in ` +
          `the ${sendData.channel.id} channel on your server **` +
          `${sendData.channel.guild.name}**. Please fix.`;
-      console.log("DEBUG: Line 65 - Send.js");
+      // console.log("DEBUG: Line 65 - Send.js");
       return sendData.channel.guild.owner.
          send(writeErr).
          catch((err) => console.log("error", err, "warning", data.message.guild.name));
@@ -145,7 +145,7 @@ function checkPerms (data, sendBox)
             `:no_entry:  **${data.message.client.user.username}** does not have permission to write in ` +
             `the ${forwardChannel.name} channel on your server **` +
             `${sendData.channel.guild.name}**. Please fix.`;
-            console.log("DEBUG: Line 147 - Send.js");
+            // console.log("DEBUG: Line 147 - Send.js");
             return sendData.channel.guild.owner.
                send(writeErr).
                catch((err) => console.log("error", err, "warning", sendData.channel.guild.name));
@@ -422,7 +422,7 @@ function embedOn (data)
                   // console.log(`DEBUG: Error ${err.code}`);
                   return logger("custom", {
                      "color": "ok",
-                     "msg": `:exclamation: Unknonw User / Member / Recipient \n
+                     "msg": `:exclamation: Unknown User / Member / Recipient \n
                   Server: **${data.guild.name}** \n
                   Channel: **${data.channel.name}**\n
                   Chan ID: **${data.channel.id}**\n
@@ -690,7 +690,7 @@ function embedOff (data)
       if (data.channel.type === "dm")
       {
 
-         console.log("DEBUG: Line 690 - Send.js");
+         // console.log("DEBUG: Line 690 - Send.js");
          const embed = new discord.MessageEmbed().
             setAuthor(data.message.author.username, data.message.author.displayAvatarURL()).
             setColor(colors.get(data.color)).
