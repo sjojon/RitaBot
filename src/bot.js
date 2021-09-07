@@ -17,7 +17,9 @@ require("dotenv").config({
 });
 const discord = require("discord.js");
 const client = new discord.Client({
-   "restRequestTimeout": time.mid
+   "restRequestTimeout": time.mid,
+   "shards": [0, 1, 2, 3, 4]
+
 });
 const auth = require("./core/auth");
 

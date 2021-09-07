@@ -23,7 +23,8 @@ const bot = path.join(
 // Shard Manager
 // --------------
 
-let shards = 2;
+
+let shards = 5;
 
 if (auth.shards)
 {
