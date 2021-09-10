@@ -369,16 +369,16 @@ function getSettings (data)
    // Error for invalid param
    // ------------------------
 
-   data.color = "error";
-   data.text =
-      `:warning:  **\`${data.cmd.params
-      }\`** is not a valid settings option.`;
+   // data.color = "error";
+   // data.text =
+   // `:warning:  **\`${data.cmd.params
+   // }\`** is not a valid settings option.`;
 
    // -------------
    // Send message
    // -------------
 
-   return sendMessage(data);
+   // return sendMessage(data);
 
 }
 
@@ -415,14 +415,15 @@ module.exports = function run (data)
 
    }
    // -----------------------------------
-   // Error if settings param is missing
+   // Server Settings
    // -----------------------------------
 
+   // Settings for current server
+   let serverSettings = "";
    if (!data.cmd.params)
    {
 
-      data.color = "info";
-      data.text =
+      serverSettings =
       `**\`\`\`${data.message.channel.guild.name} - Server Settings` +
       `\`\`\`**\n:information_source: Your current prefix is: **\`${db.server_obj[data.message.guild.id].db.prefix}\`**\n\n` +
       `:tada: Annocement Messages: **\`${data.cmd.server[0].announce}\`**\n\n` +
@@ -436,6 +437,92 @@ module.exports = function run (data)
       // -------------
 
       return sendMessage(data);
+
+   }
+
+   // Case: !t settings server
+   if (data.cmd.params && data.cmd.params.toLowerCase().includes("server"))
+   {
+
+      if (!data.cmd.num)
+      {
+
+         data.text = `${serverSettings}\n\n`;
+
+         // -------------
+         // Send message
+         // -------------
+
+         return sendMessage(data);
+
+      }
+      // eslint-disable-next-line no-unused-vars
+      const serverID = data.cmd.params.split(" ")[1].toLowerCase();
+      const target = data.message.client.guilds.cache.get(serverID);
+
+      // Settings for targeted server
+      db.getServerInfo(
+         serverID,
+         function getServerInfo (server)
+         {
+
+            if (!target)
+            {
+
+               const targetServer = `**\`\`\`${serverID} - Server Settings` +
+               `\`\`\`**\n:information_source: Your current prefix is: **\`${data.cmd.server[0].prefix}\`**\n\n` +
+               `:tada: Annocement Messages: **\`${data.cmd.server[0].announce}\`**\n\n` +
+               `:inbox_tray: Embedded Message Style: **\`${data.cmd.server[0].embedstyle}\`**\n\n` +
+               `:robot: Bot to Bot Translation Status: **\`${data.cmd.server[0].bot2botstyle}\`**\n\n` +
+               `:pause_button: Help Menu Persistance: **\`${data.cmd.server[0].persist}\`**\n\n` +
+               `:wrench: Webhook Debug Active State:  **\`${data.cmd.server[0].webhookactive}\`**\n\n`;
+
+               data.text = `${targetServer}\n\n`;
+
+               // -------------
+               // Send message
+               // -------------
+
+               return sendMessage(data);
+
+            }
+
+            if (target.owner)
+            {
+
+               const targetServer = `**\`\`\`${target.name} - Server Settings` +
+                                    `\`\`\`**\n:information_source: Your current prefix is: **\`${data.cmd.server[0].prefix}\`**\n\n` +
+                                    `:tada: Annocement Messages: **\`${data.cmd.server[0].announce}\`**\n\n` +
+                                    `:inbox_tray: Embedded Message Style: **\`${data.cmd.server[0].embedstyle}\`**\n\n` +
+                                    `:robot: Bot to Bot Translation Status: **\`${data.cmd.server[0].bot2botstyle}\`**\n\n` +
+                                    `:pause_button: Help Menu Persistance: **\`${data.cmd.server[0].persist}\`**\n\n` +
+                                    `:wrench: Webhook Debug Active State:  **\`${data.cmd.server[0].webhookactive}\`**\n\n`;
+
+               data.text = `${targetServer}\n\n`;
+
+            }
+
+            // -------------
+            // Send message
+            // -------------
+
+            return sendMessage(data);
+
+         }
+      ).catch((err) =>
+      {
+
+         console.log(
+            "error",
+            err,
+            "warning",
+            serverID
+         );
+
+         data.text = `\`\`\`${serverID} is not registered in the database.\n\n\`\`\``;
+         return sendMessage(data);
+
+      });
 
    }
 
